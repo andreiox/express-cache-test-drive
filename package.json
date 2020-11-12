@@ -4,7 +4,10 @@
     "description": "Express project with cache using ElastiCache for Redis",
     "main": "dist/server.js",
     "scripts": {
-        "test": "ava"
+        "test": "ava",
+        "start": "node dist/server.js",
+        "build": "tsc",
+        "dev": "nodemon --watch 'src/**/*.ts' --exec 'sucrase-node' src/server.ts"
     },
     "repository": {
         "type": "git",
@@ -21,5 +24,31 @@
     "bugs": {
         "url": "https://github.com/andreiox/express-cache-test-drive/issues"
     },
-    "homepage": "https://github.com/andreiox/express-cache-test-drive#readme"
+    "homepage": "https://github.com/andreiox/express-cache-test-drive#readme",
+    "devDependencies": {
+        "ava": "^3.13.0",
+        "nodemon": "^2.0.6",
+        "pre-push": "^0.1.1",
+        "sucrase": "^3.16.0",
+        "typescript": "^4.0.5"
+    },
+    "ava": {
+        "compileEnhancements": false,
+        "files": [
+            "!dist"
+        ],
+        "extensions": [
+            "ts"
+        ],
+        "require": [
+            "sucrase/register/ts"
+        ]
+    },
+    "pre-push": {
+        "silent": true,
+        "run": [
+            "test",
+            "build"
+        ]
+    }
 }
