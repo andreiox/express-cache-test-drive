@@ -7,5 +7,5 @@ test('GET /', async t => {
     const res = await request(app).get('/');
 
     t.is(res.status, 200);
-    t.is(res.text, 'Express Cache Test Drive');
+    t.deepEqual(res.body, { project: 'Express Cache Test Drive' });
 });
