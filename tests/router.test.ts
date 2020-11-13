@@ -1,7 +1,14 @@
 import test from 'ava';
 import request from 'supertest';
+import sinon from 'sinon';
 
 import app from '../src/app';
+import * as redis from '../src/redis';
+
+test.before(t => {
+    sinon.stub(redis, 'set').resolves(false);
+    sinon.stub(redis, 'get').resolves(false);
+});
 
 test('GET /', async t => {
     const res = await request(app).get('/');
