@@ -1,9 +1,15 @@
 import { Request, Response, Router } from 'express';
 
+import { set } from './redis';
+
 const router = Router();
 
 router.get('/', (req: Request, res: Response) => {
-    res.send('Express Cache Test Drive');
+    const response = { project: 'Express Cache Test Drive' };
+
+    set(res.locals.hash, JSON.stringify(response));
+
+    res.status(200).json(response);
 });
 
 export const mainRouter: Router = router;
