@@ -17,6 +17,7 @@ Cache the response based on the endpoint and body.
 -   [x] cache post requests
 -   [x] create middleware
 -   [x] docker-compose
+-   [x] default behavior to cache all requests
 
 ## docker-compose support
 
