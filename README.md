@@ -1,6 +1,6 @@
 # express-cache-test-drive
 
-Implementing cache with redis in both GET and POST requests on express.
+Implementing cache in ANY request on express .
 
 ## example
 
