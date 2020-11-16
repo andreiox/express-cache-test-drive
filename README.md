@@ -14,7 +14,7 @@ Cache the response based on the endpoint and body.
 
 -   [x] use redis
 -   [x] cache get requests
--   [ ] cache post requests
+-   [x] cache post requests
 -   [x] create middleware
 -   [x] docker-compose
 -   [ ] elasticache for redis integration
