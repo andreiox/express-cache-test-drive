@@ -1,5 +1,8 @@
+import dotenv from 'dotenv';
 import redis from 'redis';
 import { promisify } from 'util';
+
+dotenv.config();
 
 const client = redis.createClient({
     host: process.env.REDIS_HOST,
