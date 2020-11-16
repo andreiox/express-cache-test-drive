@@ -17,8 +17,6 @@ Cache the response based on the endpoint and body.
 -   [x] cache post requests
 -   [x] create middleware
 -   [x] docker-compose
--   [ ] elasticache for redis integration
--   [ ] create elasticache instance with aws-cdk
 
 ## docker-compose support
 
