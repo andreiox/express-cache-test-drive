@@ -13,4 +13,9 @@ client.on('error', function (error) {
 const get = promisify(client.get).bind(client);
 const set = promisify(client.set).bind(client);
 
-export { client, set, get };
+const setWithTTL = async (key: string, value: string) => {
+    await set(key, value);
+    client.expire(key, +process.env.CACHE_TTL!);
+};
+
+export { client, set, setWithTTL, get };

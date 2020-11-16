@@ -11,6 +11,8 @@ services:
             - "3000:3000"
         volumes:
             - .:/usr/app
+        env_file:
+            .env
         environment:
             REDIS_HOST: redis
             REDIS_PORT: 6379
