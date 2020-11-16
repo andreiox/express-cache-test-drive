@@ -14,4 +14,11 @@ router.post('/', (req: Request, res: Response, next: NextFunction) => {
     res.status(200).send(response);
 });
 
+router.post('/no-cache', (req: Request, res: Response, next: NextFunction) => {
+    const response = { datetime: new Date().toISOString(), ...req.body };
+
+    res.locals.cache = false;
+    res.status(200).json(response);
+});
+
 export const mainRouter: Router = router;

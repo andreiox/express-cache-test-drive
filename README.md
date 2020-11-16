@@ -18,6 +18,7 @@ Cache the response based on the endpoint and body.
 -   [x] create middleware
 -   [x] docker-compose
 -   [x] default behavior to cache all requests
+-   [x] opt-out caching a route (done by setting res.locals.cache = false in route)
 
 ## docker-compose support
 

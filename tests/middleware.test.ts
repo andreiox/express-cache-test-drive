@@ -23,3 +23,12 @@ test('will return cached response', async t => {
     t.is(resultHash, hash);
     t.deepEqual(result.body, cachedResult.body);
 });
+
+test('will not cache the request', async t => {
+    const data = { hello: 'world' };
+
+    await request(app).post('/no-cache').send(data);
+    const secondResult = await request(app).post('/no-cache').send(data);
+
+    t.is(secondResult.body.hash, undefined);
+});
