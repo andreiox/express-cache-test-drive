@@ -16,3 +16,13 @@ test('GET /', async t => {
     t.is(res.status, 200);
     t.deepEqual(res.body, { project: 'Express Cache Test Drive' });
 });
+
+test('POST /', async t => {
+    const data = { testing: true };
+    const res = await request(app).post('/').send(data);
+
+    delete res.body.datetime;
+
+    t.is(res.status, 200);
+    t.deepEqual(res.body, data);
+});
