@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import objectHash from 'object-hash';
+import * as mung from 'express-mung';
 
 import * as redis from './redis';
 
@@ -22,4 +23,12 @@ const cacheMiddleware = async (req: Request, res: Response, next: NextFunction) 
     }
 };
 
-export { cacheMiddleware };
+const cacheResponseTransform = (body: any, req: Request, res: Response) => {
+    if (res.statusCode === 200 && res.locals.cache !== false) {
+        redis.setWithTTL(res.locals.hash, JSON.stringify(body));
+    }
+};
+
+const cacheResponseMiddleware = mung.json(cacheResponseTransform);
+
+export { cacheMiddleware, cacheResponseMiddleware };

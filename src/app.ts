@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 
-import { cacheMiddleware } from './middleware';
+import { cacheMiddleware, cacheResponseMiddleware } from './middleware';
 import { mainRouter as router } from './router';
 
 class App {
@@ -21,6 +21,7 @@ class App {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
         this.app.use(cacheMiddleware);
+        this.app.use(cacheResponseMiddleware);
         this.app.use('/', router);
         this.app.use(this.errorHandling.bind(this));
     }

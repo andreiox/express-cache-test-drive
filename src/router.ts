@@ -1,23 +1,17 @@
-import { Request, Response, Router } from 'express';
-
-import * as redis from './redis';
+import { NextFunction, Request, Response, Router } from 'express';
 
 const router = Router();
 
-router.get('/', (req: Request, res: Response) => {
+router.get('/', (req: Request, res: Response, next: NextFunction) => {
     const response = { project: 'Express Cache Test Drive' };
-
-    redis.setWithTTL(res.locals.hash, JSON.stringify(response));
 
     res.status(200).json(response);
 });
 
-router.post('/', (req: Request, res: Response) => {
+router.post('/', (req: Request, res: Response, next: NextFunction) => {
     const response = { datetime: new Date().toISOString(), ...req.body };
 
-    redis.setWithTTL(res.locals.hash, JSON.stringify(response));
-
-    res.status(200).json(response);
+    res.status(200).send(response);
 });
 
 export const mainRouter: Router = router;
