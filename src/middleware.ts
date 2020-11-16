@@ -1,17 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
-import objectHash from 'object-hash';
 import * as mung from 'express-mung';
 
 import * as redis from './redis';
+import { generateRequestHash } from './hash';
 
 const cacheMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-    const data = {
-        endpoint: req.originalUrl || req.url,
-        params: req.params,
-        body: req.body,
-    };
-
-    const hash = objectHash(data);
+    const hash = generateRequestHash(req);
     const cachedResponse = await redis.get(hash);
 
     if (cachedResponse) {
