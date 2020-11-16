@@ -14,7 +14,7 @@ const cacheMiddleware = async (req: Request, res: Response, next: NextFunction) 
     const cachedResponse = await redis.get(hash);
 
     if (cachedResponse) {
-        res.status(200).json({ hash, response: JSON.parse(cachedResponse) });
+        res.status(200).json({ hash, ...JSON.parse(cachedResponse) });
     } else {
         res.locals.hash = hash;
 
